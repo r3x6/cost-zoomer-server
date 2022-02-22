@@ -125,6 +125,7 @@ const prepareMyTrips = async (req, res) => {
 };
 
 const newTrip = async (req, res) => {
+    console.log(req.body);
     const pool = new Pool(credentials);
 
     const text = `
@@ -164,6 +165,7 @@ const selectUserTrips = async (req, res) => {
 };
 
 const updateTrip = async (req, res) => {
+    console.log(req.body);
     const pool = new Pool(credentials);
     const text = `UPDATE trip_data 
                 SET timing = $2,
@@ -173,10 +175,10 @@ const updateTrip = async (req, res) => {
                 cost = $6
                 WHERE trip_id = $1`;
     const values = [
-        req.body.trip_id,
+        req.body.tripId,
         req.body.timing,
-        req.body.distance,
-        req.body.wait_time,
+        req.body.dist,
+        req.body.time,
         req.body.app,
         req.body.cost,
     ];
@@ -191,9 +193,10 @@ const updateTrip = async (req, res) => {
 };
 
 const deleteTrip = async (req, res) => {
+    console.log(req.body.tripId);
     const pool = new Pool(credentials);
-    const text = `DELETE FROM trip_data WHERE id = $1`;
-    const values = [req.body.trip_id];
+    const text = `DELETE FROM trip_data WHERE trip_id = $1`;
+    const values = [req.body.tripId];
     return pool.query(text, values, (err) => {
         if (err) {
             return res.status(401).send({
