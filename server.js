@@ -40,11 +40,12 @@ app.listen(port, () => {
     console.log(`CostZoomer server is running on port ${port}.`);
 });
 
-app.post("/prepareregister", api.prepareRegister);
+app.post("/prepareregister/", api.prepareRegister);
 app.post("/registeruser", api.registerUser);
 app.post("/verifylogin", api.verifyLogin);
 app.post("/authtoken", api.authToken);
 app.post("/preparemytrips", api.prepareMyTrips);
 app.post("/newtrip", api.newTrip);
+app.post("/selectusertrips", api.selectUserTrips);
 app.post("/updatetrip", api.updateTrip);
 app.post("/deletetrip", api.deleteTrip);
